@@ -4,6 +4,7 @@ import React from 'react';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { StyleSheet, Text, View } from 'react-native';
+import Constants from 'expo-constants'
 import DeckList from './components/DeckList'
 import Deck from './components/Deck'
 import NewDeck from './components/NewDeck'
@@ -13,9 +14,14 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons'
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <StatusBar style={{height: 20, backgroundColor: 'blue'}} />
-      <Quiz />
+    <View style={{flex: 1}}>
+      <View style={{backgroundColor: '#944e6c', height: Constants.statusBarHeight}}>
+        <StatusBar translucent backgroundColor='#944e6c' barStyle='light-content' />
+      </View>
+      <View style={styles.mainContent}>
+        <Quiz />
+      </View>
+      
     </View>
   );
 }
@@ -27,4 +33,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  mainContent: {
+    paddingTop: 30,
+    fontSize: 25
+  }
 });

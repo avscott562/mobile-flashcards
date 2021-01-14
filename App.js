@@ -7,19 +7,42 @@ import { StyleSheet, Text, View } from 'react-native';
 import Constants from 'expo-constants'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import DeckList from './components/DeckList'
 import Deck from './components/Deck'
 import NewDeck from './components/NewDeck'
-import NewCard from './components/NewCard'
 import Quiz from './components/Quiz'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { mauve } from './utils/colors'
 
 const DeckNavigatorStack = createStackNavigator()
+const HomeTab = createMaterialTopTabNavigator()
+
+const HomeTabScreen = () => (
+    <HomeTab.Navigator
+      initialRouteName="DeckList"
+      backBehavior='history'
+      tabBarOptions={{
+        activeTintColor: '#654062'
+      }}>
+        <HomeTab.Screen 
+          name='DeckList' 
+          component={DeckList}
+          options={{
+            tabBarLabel: 'Decks'
+          }}/>
+          <HomeTab.Screen 
+          name='NewDeck' 
+          component={NewDeck}
+          options={{
+            tabBarLabel: 'Add Deck'
+          }}/>
+    </HomeTab.Navigator>
+)
 
 const DeckNavigatorStackScreen = () => (
   <DeckNavigatorStack.Navigator
-    initialRouteName='DeckList'
+    initialRouteName='Home'
     screenOptions={{
       headerTintColor: '#fff',
       headerStyle: {
@@ -27,14 +50,13 @@ const DeckNavigatorStackScreen = () => (
       }
     }}>
     <DeckNavigatorStack.Screen 
-      name='DeckList' 
-      component={DeckList}
+      name='Home' 
+      component={HomeTabScreen}
       options={{ title: 'Decks' }} />
     <DeckNavigatorStack.Screen 
       name='Deck' 
       component={Deck}
       options={({ route }) => ({title: route.params.title})} />
-      {/* options={({ route }) => ({title: route.params.date})} */}
   </DeckNavigatorStack.Navigator>
 )
 

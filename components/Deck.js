@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native'
+import NewCard from './NewCard'
 
 class Deck extends Component {
     render() {

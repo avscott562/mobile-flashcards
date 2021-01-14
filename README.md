@@ -6,4 +6,6 @@
 npm install
 ```
 
-## Dependencies
+## Platform
+
+This app has been tested for Android devices.

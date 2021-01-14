@@ -1,0 +1,1 @@
+export const mauve = '#944e6c'

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
 export class DeckList extends Component {
@@ -11,22 +11,34 @@ export class DeckList extends Component {
         return (
             <View>
                 <Text>Decks</Text>
-                <View>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate(
+                  'Deck',
+                  { title: 'Geography Wizards' }
+              )}>
                     <Text> Deck Title 1 </Text>
                     <Text> 2 Cards </Text>
-                </View>
-                <View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate(
+                  'Deck',
+                  { title: 'Math Champs' }
+              )}>
                     <Text> Deck Title 2 </Text>
                     <Text> 3 Cards </Text>
-                </View>
-                <View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate(
+                  'Deck',
+                  { title: 'Music Stans' }
+              )}>
                     <Text> Deck Title 3 </Text>
                     <Text> 0 Cards </Text>
-                </View>
-                <View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate(
+                  'Deck',
+                  { title: 'A Night at the Movies' }
+              )}>
                     <Text> Deck Title 4 </Text>
                     <Text> 6 Cards </Text>
-                </View>
+                </TouchableOpacity>
             </View>
         )
     }

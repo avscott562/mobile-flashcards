@@ -40,6 +40,20 @@ export function _getDecks () {
     }
   }
 
+  export function _getDeck (id) {
+    return new Promise((res, rej) => {
+        const deck = decks[id]
+      setTimeout(() => res(deck), 1000)
+    })
+  }
+
+  function formatDeck ({ title }) {
+    return {
+      title,
+      questions: []
+    }
+  }
+
   export function _saveDeckTitle (title) {
     return new Promise((res, rej) => {
       const deck = {
@@ -58,19 +72,15 @@ export function _getDecks () {
     })
   }
 
-  export function _addCardToDeck ({ deckId, question, answer }) {
+  export function _addCardToDeck ({ deckId, card }) {
     return new Promise((res, rej) => {
-        const formattedQuestion = {
-            question,
-            answer
-        }
       setTimeout(() => {
 
         decks = {
           ...decks,
           [deckId]: {
             ...decks[deckId],
-            questions: decks[deckId].questions.concat([formattedQuestion])
+            questions: decks[deckId].questions.concat([card])
           }
         }
   

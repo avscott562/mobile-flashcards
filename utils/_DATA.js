@@ -47,12 +47,12 @@ export function _getDecks () {
     })
   }
 
-  function formatDeck ({ title }) {
-    return {
-      title,
-      questions: []
-    }
-  }
+  // function formatDeck ({ title }) {
+  //   return {
+  //     title,
+  //     questions: []
+  //   }
+  // }
 
   export function _saveDeckTitle (title) {
     return new Promise((res, rej) => {

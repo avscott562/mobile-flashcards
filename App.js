@@ -8,6 +8,7 @@ import Constants from 'expo-constants'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import reducer from './reducers'
 import DeckList from './components/DeckList'
 import Deck from './components/Deck'
 import NewDeck from './components/NewDeck'
@@ -64,12 +65,14 @@ export default class App extends Component {
   render() {
     return (
       <NavigationContainer>
-        <View style={{flex: 1}}>
-          <View style={{backgroundColor: mauve, height: Constants.statusBarHeight}}>
-            <StatusBar translucent backgroundColor={mauve} barStyle='light-content' />
+        <Provider store={createStore(reducer)}>
+          <View style={{flex: 1}}>
+            <View style={{backgroundColor: mauve, height: Constants.statusBarHeight}}>
+              <StatusBar translucent backgroundColor={mauve} barStyle='light-content' />
+            </View>
+            <DeckNavigatorStackScreen />
           </View>
-          <DeckNavigatorStackScreen />
-        </View>
+        </Provider>
       </NavigationContainer>
     )
   }

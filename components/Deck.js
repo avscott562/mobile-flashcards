@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native'
+import { connect } from 'react-redux'
 import NewCard from './NewCard'
 
 class Deck extends Component {
@@ -22,4 +23,4 @@ class Deck extends Component {
 
 // const styles = StyleSheet.create({})
 
-export default Deck
+export default connect()(Deck)

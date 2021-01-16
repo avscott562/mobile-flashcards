@@ -2,14 +2,22 @@ import {
     _getDecks,
     _getDeck,
     _saveDeckTitle,
-    _addCardToDeck
+    _addCardToDeck,
 } from './_DATA'
 
 export function getDecks () {
-    return _getDecks().then((decks) => ({
-        decks
-    }))
+    return _getDecks()
 }
+
+// export function getDeck (id) {
+//     const card = {
+//         title: 'nothing',
+//         questions: [1,2,3]
+//     }
+//     return typeof id === 'undefined'
+//         ? card
+//         : card[id]
+// }
 
 export function getDeck (id) {
     return _getDeck(id)

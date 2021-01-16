@@ -1,57 +1,86 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
+import { receiveDecks, receiveDeck, addDeck, addCard } from '../actions'
+import { getDecks, getDeck, saveDeckTitle, addCardToDeck } from '../utils/helpers'
+import { mauve } from '../utils/colors'
+import Deck from './Deck'
 
 
 export class DeckList extends Component {
     state = {
-        loading: false
+        ready: false
+    }
+
+    componentDidMount() {
+        const { dispatch } = this.props
+
+        getDecks()
+          .then((decks) => dispatch(receiveDecks(decks)))
+          .then(() => this.setState(() => ({
+              ready: true
+          })))
     }
 
     render() {
+        const { decks } = this.props
+
         return (
             <View>
                 <Text>Decks</Text>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate(
-                  'Deck',
-                  { title: 'Geography Wizards' }
-              )}>
-                    <Text> Deck Title 1 </Text>
-                    <Text> 2 Cards </Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate(
-                  'Deck',
-                  { title: 'Math Champs' }
-              )}>
-                    <Text> Deck Title 2 </Text>
-                    <Text> 3 Cards </Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate(
-                  'Deck',
-                  { title: 'Music Stans' }
-              )}>
-                    <Text> Deck Title 3 </Text>
-                    <Text> 0 Cards </Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate(
-                  'Deck',
-                  { title: 'A Night at the Movies' }
-              )}>
-                    <Text> Deck Title 4 </Text>
-                    <Text> 6 Cards </Text>
-                </TouchableOpacity>
+                {Object.keys(decks).map((deck) => {
+                    const deckInfo = decks[deck]
+                    // const check = getDeck('birds')
+                    // console.log(check)
+                    return(
+                        <TouchableOpacity 
+                        key={deck}
+                        style={styles.container}
+                        onPress={() => this.props.navigation.navigate(
+                            'Deck',
+                            { 
+                                title: deckInfo.title,
+                                deckId: deck
+                            }
+                        )}>
+                            <Text style={styles.deckTitle}>{deckInfo.title}</Text>
+                            <Text style={{color: '#fff'}}>{`${deckInfo.questions.length} Cards`}</Text>
+                        </TouchableOpacity>
+                    )
+                })}
             </View>
         )
     }
 }
 
-// const mapStateToProps = (state) => ({
-    
-// })
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: mauve,
+        borderRadius: 5,
+        padding: 20,
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 17,
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowRadius: 3,
+        shadowOpacity: 0.8,
+        shadowColor: '#33e67c',
+        shadowOffset: {
+            width: 0,
+            height: 3
+        },
+    },
+    deckTitle: {
+        color: '#fff',
+        fontSize: 20,
+    }
+})
 
-// const mapDispatchToProps = {
-    
-// }
+function mapStateToProps (decks) {
+    return {
+        decks
+    }
+}
 
-// export default connect(mapStateToProps, mapDispatchToProps)(DeckList)
-export default DeckList
+export default connect(mapStateToProps)(DeckList)

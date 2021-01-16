@@ -1,6 +1,8 @@
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+
 let decks = {
     birds: {
-        title: 'birds',
+        title: 'Birds',
         questions: [
             {
                 question: 'What kind of bird talks?',
@@ -13,11 +15,11 @@ let decks = {
         ]
     },
     food: {
-        title: 'food',
+        title: 'Food',
         questions: []
     },
     songs: {
-        title: 'songs',
+        title: 'Songs',
         questions: [
             {
                 question: 'What is the most sung song in the world?',
@@ -26,6 +28,8 @@ let decks = {
         ]
     },
 }
+
+export const FLASHCARD_STORAGE_KEY = 'UdaciFlashcards:flashcards'
 
 export function _getDecks () {
     return new Promise((res, rej) => {
@@ -42,8 +46,8 @@ export function _getDecks () {
 
   export function _getDeck (id) {
     return new Promise((res, rej) => {
-        const deck = decks[id]
-      setTimeout(() => res(deck), 1000)
+      console.log(decks[id])
+      setTimeout(() => res(decks[id]), 1000)
     })
   }
 
@@ -60,11 +64,13 @@ export function _getDecks () {
           title,
           questions: []
       };
+
+      const id = title.replaceAll(' ', '')
   
       setTimeout(() => {
         decks = {
           ...decks,
-          [title]: deck
+          [id]: deck
         }
   
         res(deck)

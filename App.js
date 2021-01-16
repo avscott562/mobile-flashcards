@@ -17,6 +17,9 @@ import Quiz from './components/Quiz'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { mauve } from './utils/colors'
 
+
+
+
 const DeckNavigatorStack = createStackNavigator()
 const HomeTab = createMaterialTopTabNavigator()
 

@@ -82,8 +82,8 @@ export function _getDecks () {
 
   export function _addCardToDeck ({ deckId, card }) {
     return new Promise((res, rej) => {
+      console.log('from data file: ', decks[deckId])
       setTimeout(() => {
-
         decks = {
           ...decks,
           [deckId]: {

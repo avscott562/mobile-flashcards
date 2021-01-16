@@ -1,12 +1,15 @@
+import AsyncStorage from '@react-native-community/async-storage'
 import {
     _getDecks,
     _getDeck,
     _saveDeckTitle,
     _addCardToDeck,
+    FLASHCARD_STORAGE_KEY
 } from './_DATA'
 
 export function getDecks () {
-    return _getDecks()
+    return AsyncStorage.getItem(FLASHCARD_STORAGE_KEY)
+        .then((results) => JSON.parse(results))
 }
 
 // export function getDeck (id) {

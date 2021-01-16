@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { receiveDecks, receiveDeck, addDeck, addCard } from '../actions'
 import { getDecks, getDeck, saveDeckTitle, addCardToDeck } from '../utils/helpers'
+import { FLASHCARD_STORAGE_KEY } from '../utils/_DATA'
 import { mauve } from '../utils/colors'
 import Deck from './Deck'
 
@@ -70,6 +71,9 @@ const styles = StyleSheet.create({
             width: 0,
             height: 3
         },
+    },
+    header: {
+        fontSize: 35,
     },
     deckTitle: {
         color: '#fff',

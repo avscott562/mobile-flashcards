@@ -12,6 +12,7 @@ import reducer from './reducers'
 import DeckList from './components/DeckList'
 import Deck from './components/Deck'
 import NewDeck from './components/NewDeck'
+import NewCard from './components/NewCard'
 import Quiz from './components/Quiz'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { mauve } from './utils/colors'
@@ -57,6 +58,10 @@ const DeckNavigatorStackScreen = () => (
     <DeckNavigatorStack.Screen 
       name='Deck' 
       component={Deck}
+      options={({ route }) => ({title: route.params.title})} />
+      <DeckNavigatorStack.Screen 
+      name='NewCard' 
+      component={NewCard}
       options={({ route }) => ({title: route.params.title})} />
   </DeckNavigatorStack.Navigator>
 )

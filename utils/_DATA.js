@@ -1,4 +1,4 @@
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-community/async-storage'
 
 let decks = {
     birds: {
@@ -30,6 +30,8 @@ let decks = {
 }
 
 export const FLASHCARD_STORAGE_KEY = 'UdaciFlashcards:flashcards'
+
+AsyncStorage.setItem(FLASHCARD_STORAGE_KEY, JSON.stringify(decks))
 
 export function _getDecks () {
     return new Promise((res, rej) => {

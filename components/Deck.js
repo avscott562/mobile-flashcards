@@ -5,11 +5,15 @@ import NewCard from './NewCard'
 
 class Deck extends Component {
     render() {
+        const { deckId, deck, navigation } = this.props
         return (
             <View>
-                <Text> Deck Title 2</Text>
-                <Text> 3 Cards</Text>
-                <TouchableOpacity>
+                <Text>{deck.title}</Text>
+                <Text>{`${deck.questions.length} Cards`}</Text>
+                <TouchableOpacity onPress={() => navigation.navigate(
+                    'NewCard',
+                    { deckId, title: deck.title }
+                )}>
                     <Text>Add New Card</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
@@ -23,4 +27,16 @@ class Deck extends Component {
 
 // const styles = StyleSheet.create({})
 
-export default connect()(Deck)
+function mapStateToProps (state, { route, navigation }) {
+    const { deckId } = route.params
+    const deck = state[deckId]
+
+    return {
+        navigation,
+        route,
+        deck,
+        deckId
+    }
+}
+
+export default connect(mapStateToProps)(Deck)

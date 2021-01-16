@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { mauve } from '../utils/colors'
-import NewCard from './NewCard'
 
 class Deck extends Component {
     state = {

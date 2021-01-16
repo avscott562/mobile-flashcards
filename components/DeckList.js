@@ -5,7 +5,6 @@ import { receiveDecks, receiveDeck, addDeck, addCard } from '../actions'
 import { getDecks, getDeck, saveDeckTitle, addCardToDeck } from '../utils/helpers'
 import { FLASHCARD_STORAGE_KEY } from '../utils/_DATA'
 import { mauve } from '../utils/colors'
-import Deck from './Deck'
 
 
 export class DeckList extends Component {

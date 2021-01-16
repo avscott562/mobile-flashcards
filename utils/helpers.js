@@ -23,7 +23,9 @@ export function getDecks () {
 // }
 
 export function getDeck (id) {
-    return _getDeck(id)
+    return AsyncStorage.getItem(FLASHCARD_STORAGE_KEY)
+        .then((results) => JSON.parse(result))
+        .then((decks) => decks[id])
 }
 
 export function saveDeckTitle (title) {

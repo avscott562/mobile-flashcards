@@ -29,7 +29,14 @@ export function getDeck (id) {
 }
 
 export function saveDeckTitle (title) {
-    return _saveDeckTitle(title)
+    const deck = {
+        title,
+        questions: []
+    };
+
+    return AsyncStorage.setItem(FLASHCARD_STORAGE_KEY, JSON.stringify({
+        [title]: deck
+    }))
 }
 
 export function addCardToDeck (title, card) {

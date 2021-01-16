@@ -121,8 +121,7 @@ const styles = StyleSheet.create({
     submitBtn: {
         backgroundColor: mauve,
         padding: 10,
-        paddingLeft: 30,
-        paddingRight: 30,
+        margin: 20,
         borderRadius: 2,
         height: 45,
         alignSelf: 'flex-end',

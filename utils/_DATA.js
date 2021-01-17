@@ -33,25 +33,25 @@ export const FLASHCARD_STORAGE_KEY = 'UdaciFlashcards:flashcards'
 
 AsyncStorage.setItem(FLASHCARD_STORAGE_KEY, JSON.stringify(decks))
 
-export function _getDecks () {
-    return new Promise((res, rej) => {
-      setTimeout(() => res({...decks}), 1000)
-    })
-  }
+// export function _getDecks () {
+//     return new Promise((res, rej) => {
+//       setTimeout(() => res({...decks}), 1000)
+//     })
+//   }
 
-  function formatDeck ({ title }) {
-    return {
-      title,
-      questions: []
-    }
-  }
+//   function formatDeck ({ title }) {
+//     return {
+//       title,
+//       questions: []
+//     }
+//   }
 
-  export function _getDeck (id) {
-    return new Promise((res, rej) => {
-      console.log(decks[id])
-      setTimeout(() => res(decks[id]), 1000)
-    })
-  }
+//   export function _getDeck (id) {
+//     return new Promise((res, rej) => {
+//       console.log(decks[id])
+//       setTimeout(() => res(decks[id]), 1000)
+//     })
+//   }
 
   // function formatDeck ({ title }) {
   //   return {
@@ -60,39 +60,39 @@ export function _getDecks () {
   //   }
   // }
 
-  export function _saveDeckTitle (title) {
-    return new Promise((res, rej) => {
-      const deck = {
-          title,
-          questions: []
-      };
+  // export function _saveDeckTitle (title) {
+  //   return new Promise((res, rej) => {
+  //     const deck = {
+  //         title,
+  //         questions: []
+  //     };
 
-      const id = title.replaceAll(' ', '')
+  //     const id = title.replaceAll(' ', '')
   
-      setTimeout(() => {
-        decks = {
-          ...decks,
-          [id]: deck
-        }
+  //     setTimeout(() => {
+  //       decks = {
+  //         ...decks,
+  //         [id]: deck
+  //       }
   
-        res(deck)
-      }, 1000)
-    })
-  }
+  //       res(deck)
+  //     }, 1000)
+  //   })
+  // }
 
-  export function _addCardToDeck ({ deckId, card }) {
-    return new Promise((res, rej) => {
-      console.log('from data file: ', decks[deckId])
-      setTimeout(() => {
-        decks = {
-          ...decks,
-          [deckId]: {
-            ...decks[deckId],
-            questions: decks[deckId].questions.concat([card])
-          }
-        }
+  // export function _addCardToDeck ({ deckId, card }) {
+  //   return new Promise((res, rej) => {
+  //     console.log('from data file: ', decks[deckId])
+  //     setTimeout(() => {
+  //       decks = {
+  //         ...decks,
+  //         [deckId]: {
+  //           ...decks[deckId],
+  //           questions: decks[deckId].questions.concat([card])
+  //         }
+  //       }
   
-        res()
-      }, 500)
-    })
-  }
+  //       res()
+  //     }, 500)
+  //   })
+  // }

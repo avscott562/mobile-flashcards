@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
+import { CommonActions } from '@react-navigation/native'
 import { connect } from 'react-redux'
 import { addCard } from '../actions'
 import { addCardToDeck } from '../utils/helpers'
@@ -41,6 +42,17 @@ class NewCard extends Component {
         this.setState(() => ({
             question: '',
             answer: ''
+        }))
+
+        this.toDeck(deckId)
+    }
+
+    toDeck = (deckId) => {
+        this.props.navigation.dispatch(CommonActions.navigate({
+            name: 'Deck',
+            params: {
+                deckId
+            }
         }))
     }
 

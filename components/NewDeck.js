@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
+import { CommonActions } from '@react-navigation/native'
 import { connect } from 'react-redux'
 import { addDeck } from '../actions'
 import { saveDeckTitle } from '../utils/helpers'
@@ -32,6 +33,17 @@ class NewDeck extends Component {
         this.setState(() => ({
             title: ''
         }))
+
+        this.toDeck(title)
+    }
+
+    toDeck = (deckId) => {
+        this.props.navigation.dispatch(CommonActions.navigate({
+            name: 'Deck',
+            params: {
+                deckId
+            }
+        }))
     }
 
 
@@ -49,7 +61,7 @@ class NewDeck extends Component {
                             borderWidth: 1
                         }}
                         placeholder="Please enter deck title."
-                        onChange={entry => this.handleChange(entry)}
+                        onChangeText={val => this.handleChange(val)}
                         value={title}
                     />
                 </View>

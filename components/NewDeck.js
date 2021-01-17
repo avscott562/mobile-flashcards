@@ -1,5 +1,12 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
+import { 
+    Text, 
+    View, 
+    TouchableOpacity, 
+    TextInput, 
+    StyleSheet,
+    KeyboardAvoidingView 
+} from 'react-native'
 import { CommonActions } from '@react-navigation/native'
 import { connect } from 'react-redux'
 import { addDeck } from '../actions'
@@ -50,7 +57,7 @@ class NewDeck extends Component {
     render() {
         const { title } = this.state
         return (
-            <View>
+            <KeyboardAvoidingView behavior="padding" style={styles.container}>
                 <Text> New Deck </Text>
                 
                 <View style={styles.inputContainer}>
@@ -67,17 +74,23 @@ class NewDeck extends Component {
                 </View>
                 <View>
                     <TouchableOpacity
-                    style={styles.submitBtn}
-                    onPress={this.submitDeck}>
+                      disabled={title === ''}
+                      style={styles.submitBtn}
+                      onPress={this.submitDeck}>
                         <Text style={styles.submitBtnText}>SUBMIT</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+    },
     inputHeader: {
         fontSize: 35,
         paddingBottom: 25

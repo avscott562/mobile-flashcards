@@ -27,7 +27,12 @@ class Deck extends Component {
                     )}>
                         <Text style={styles.submitBtnText}>Add New Card</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.submitBtn, {backgroundColor: '#83a95c'}}>
+                    <TouchableOpacity 
+                      style={styles.submitBtn, {backgroundColor: '#83a95c'}}
+                      onPress={() => navigation.navigate(
+                          'Quiz',
+                          { deckId, title: deck.title }
+                      )}>
                         <Text style={styles.submitBtnText}>Start Quiz</Text>
                     </TouchableOpacity>
                 </View>

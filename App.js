@@ -14,7 +14,7 @@ import Deck from './components/Deck'
 import NewDeck from './components/NewDeck'
 import NewCard from './components/NewCard'
 import Quiz from './components/Quiz'
-import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
 import { mauve } from './utils/colors'
 
 
@@ -34,13 +34,19 @@ const HomeTabScreen = () => (
           name='DeckList' 
           component={DeckList}
           options={{
-            tabBarLabel: 'Decks'
+            tabBarLabel: 'Decks',
+            tabBarIcon: ({ tintColor }) => (
+              <MaterialCommunityIcons name={focused ? "cards" : 'cards-outline'} color={tintColor} size={30} />
+            ),
           }}/>
           <HomeTab.Screen 
           name='NewDeck' 
           component={NewDeck}
           options={{
-            tabBarLabel: 'Add Deck'
+            tabBarLabel: 'Add Deck',
+            tabBarIcon: ({ tintColor }) => (
+              <FontAwesome name={ focuesed ? "plus-square" : 'plus-square-o'} color={tintColor} size={30} />
+            ),
           }}/>
     </HomeTab.Navigator>
 )
@@ -65,6 +71,10 @@ const DeckNavigatorStackScreen = () => (
       <DeckNavigatorStack.Screen 
       name='NewCard' 
       component={NewCard}
+      options={({ route }) => ({title: route.params.title})} />
+      <DeckNavigatorStack.Screen 
+      name='Quiz' 
+      component={Quiz}
       options={({ route }) => ({title: route.params.title})} />
   </DeckNavigatorStack.Navigator>
 )

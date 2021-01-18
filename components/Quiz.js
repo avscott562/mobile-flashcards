@@ -28,7 +28,7 @@ class Quiz extends Component {
                 <View style={styles.container}>
                     {!displayAnswer
                     ? <View>
-                        <Text style={styles.question}>What is the capitol of Louisiana?</Text>
+                        <Text style={styles.mainText}>What is the capitol of Louisiana?</Text>
                         <TouchableOpacity 
                           style={styles.button}
                           onPress={this.toggleAnswer}>
@@ -36,7 +36,7 @@ class Quiz extends Component {
                         </TouchableOpacity>
                       </View>
                     : <View>
-                        <Text style={styles.answer}>Baton Rouge</Text>
+                        <Text style={styles.mainText}>Baton Rouge</Text>
                         <TouchableOpacity style={styles.button}>
                             <Text style={styles.buttonText}>Correct</Text>
                         </TouchableOpacity>
@@ -82,12 +82,8 @@ const styles = StyleSheet.create({
         fontSize: 35,
         alignSelf: 'center'
     },
-    question: {
+    mainText: {
         color: mauve,
-        fontSize: 20,
-    },
-    answer: {
-        color: 'black',
         fontSize: 20,
     },
     button: {

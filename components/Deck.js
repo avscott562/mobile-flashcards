@@ -1,13 +1,40 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, TouchableOpacity } from 'react-native'
+import { Text, StyleSheet, View, TouchableOpacity, TabBarIOS } from 'react-native'
 import { connect } from 'react-redux'
 import { mauve } from '../utils/colors'
 
 class Deck extends Component {
     state = {
-        showAnswer: false,
-        correct: 0,
-        incorrect: 0
+        hasCards: false,
+    }
+
+    componentDidMount() {
+        this.checkForCards()
+    }
+
+    checkForCards = () => {
+        const { deck, route } = this.props
+
+        if ((deck.questions.length > 0) || (route.params.hasCards === true)) {
+            this.setState(() => ({
+                hasCards: true
+            }))
+        }
+    }
+
+    toQuiz = async () => {
+        const { navigation, deckId, deck:{title} } = this.props
+
+        await this.checkForCards()
+        
+        if (this.state.hasCards === false) {
+            alert('Please add flashcards to the deck to begin quiz.')
+        } else {
+            navigation.navigate(
+                'Quiz',
+                { deckId, title }
+            )
+        }
     }
 
     render() {
@@ -28,11 +55,9 @@ class Deck extends Component {
                         <Text style={styles.submitBtnText}>Add New Card</Text>
                     </TouchableOpacity>
                     <TouchableOpacity 
+                    //   disabled={hasCards}
                       style={styles.submitBtn, {backgroundColor: '#83a95c'}}
-                      onPress={() => navigation.navigate(
-                          'Quiz',
-                          { deckId, title: deck.title }
-                      )}>
+                      onPress={this.toQuiz}>
                         <Text style={styles.submitBtnText}>Start Quiz</Text>
                     </TouchableOpacity>
                 </View>
@@ -103,7 +128,7 @@ const styles = StyleSheet.create({
 function mapStateToProps (state, { route, navigation }) {
     const { deckId } = route.params
     const deck = state[deckId]
-
+    console.log('from deck m2s: ', route.params)
     return {
         navigation,
         route,

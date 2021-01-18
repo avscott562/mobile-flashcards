@@ -6,13 +6,11 @@ import { mauve } from '../utils/colors'
 
 class Quiz extends Component {
     state = {
-        displayAnswer: false,
         screen: 'question',
         cardIndex: 0,
         totalCards: 1,
         correct: 0,
         incorrect: 0,
-        quizComplete: false
     }
 
     componentDidMount() {
@@ -62,14 +60,30 @@ class Quiz extends Component {
         }
     }
 
+    reset = () => {
+        const { deckId, navigation } = this.props
+        
+        this.setState(() => ({
+            screen: 'question',
+            cardIndex: 0,
+            correct: 0,
+            incorrect: 0,
+        }))
+
+        navigation.dispatch(CommonActions.navigate({
+            name: 'Quiz',
+            params: {
+                deckId
+            }
+        }))
+    }
+
     render() {
         const { 
-            displayAnswer, 
             screen,
             cardIndex,
             totalCards, 
-            correct, 
-            quizComplete } = this.state
+            correct } = this.state
 
         const { deck, navigation } = this.props
 
@@ -109,15 +123,16 @@ class Quiz extends Component {
                     
                     {screen === 'score' && 
                       <View>
-                          <Text>{`${percentage}%`}</Text>
-                          <Text>You did great!</Text>
+                          <Text style={styles.mainText}>{`${percentage}%`}</Text>
+                          <Text style={styles.mainText}>You did great!</Text>
                           <TouchableOpacity
                             style={styles.button}
-                            onPress={() => this.props.navigation.navigate('Home')}>
+                            onPress={() => navigation.navigate('DeckList')}>
                               <Text style={styles.buttonText}>Go To Decks</Text>
                           </TouchableOpacity>
                           <TouchableOpacity
-                            style={styles.button}>
+                            style={styles.button}
+                            onPress={this.reset}>
                               <Text style={styles.buttonText}>Restart Quiz</Text>
                           </TouchableOpacity>
                       </View>

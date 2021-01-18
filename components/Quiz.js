@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, StyleSheet, Animated } from 'react-native'
 import { connect } from 'react-redux'
 import { CommonActions } from '@react-navigation/native'
-import Score from './Score'
 import { mauve } from '../utils/colors'
 
 class Quiz extends Component {
     state = {
         displayAnswer: false,
+        screen: 'question',
         cardIndex: 0,
         totalCards: 1,
         correct: 0,
@@ -25,7 +25,7 @@ class Quiz extends Component {
 
     toggleAnswer = () => {
         this.setState(() => ({
-            displayAnswer: !this.state.displayAnswer
+            screen: 'answer'
         }))
     }
 
@@ -52,12 +52,12 @@ class Quiz extends Component {
 
         if (answered < totalCards) {
             this.setState(() => ({
-                displayAnswer: false,
+                screen: 'question',
                 cardIndex: answered
             }))
         } else {
             this.setState(() => ({
-                quizComplete: true
+                screen: 'score'
             }))
         }
     }
@@ -65,46 +65,62 @@ class Quiz extends Component {
     render() {
         const { 
             displayAnswer, 
+            screen,
             cardIndex,
             totalCards, 
             correct, 
             quizComplete } = this.state
-        const { deck } = this.props
+
+        const { deck, navigation } = this.props
+
+        const percentage = (correct / totalCards) * 100
 
         return (
             <View>
                 <Text style={styles.header}> Quiz </Text>
                 <Text>{correct} / {totalCards}</Text>
                 <View style={styles.container}>
-                    {!displayAnswer
-                    ? <View>
-                        <Text style={styles.mainText}>{deck.questions[cardIndex].question}</Text>
-                        <TouchableOpacity 
-                          style={styles.button}
-                          onPress={this.toggleAnswer}>
-                            <Text style={styles.buttonText}>View Answer</Text>
-                        </TouchableOpacity>
-                      </View>
-                    : <View>
-                        <Text style={styles.mainText}>{deck.questions[cardIndex].answer}</Text>
-                        <TouchableOpacity 
-                          style={styles.button}
-                          onPress={this.incrementScore}>
-                            <Text style={styles.buttonText}>Correct</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity 
-                          style={styles.button}
-                          onPress={this.decrementScore}>
-                            <Text style={styles.buttonText}>Incorrect</Text>
-                        </TouchableOpacity>
-                      </View>
+                    {screen === 'question' && 
+                        <View>
+                            <Text style={styles.mainText}>{deck.questions[cardIndex].question}</Text>
+                            <TouchableOpacity 
+                            style={styles.button}
+                            onPress={this.toggleAnswer}>
+                                <Text style={styles.buttonText}>View Answer</Text>
+                            </TouchableOpacity>
+                        </View>
+                    }
+
+                    {screen === 'answer' &&
+                        <View>
+                            <Text style={styles.mainText}>{deck.questions[cardIndex].answer}</Text>
+                            <TouchableOpacity 
+                                style={styles.button}
+                                onPress={this.incrementScore}>
+                                <Text style={styles.buttonText}>Correct</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity 
+                                style={styles.button}
+                                onPress={this.decrementScore}>
+                                <Text style={styles.buttonText}>Incorrect</Text>
+                            </TouchableOpacity>
+                        </View>
                     }
                     
-                    {quizComplete && 
-                    <View>
-                        <Text>quiz completed? {quizComplete}</Text>
-                        <Score />
-                    </View>
+                    {screen === 'score' && 
+                      <View>
+                          <Text>{`${percentage}%`}</Text>
+                          <Text>You did great!</Text>
+                          <TouchableOpacity
+                            style={styles.button}
+                            onPress={() => this.props.navigation.navigate('Home')}>
+                              <Text style={styles.buttonText}>Go To Decks</Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity
+                            style={styles.button}>
+                              <Text style={styles.buttonText}>Restart Quiz</Text>
+                          </TouchableOpacity>
+                      </View>
                     }
                 </View>
                 

@@ -34,8 +34,7 @@ class Quiz extends Component {
             correct: this.state.correct + 1
         }))
 
-        console.log('correct', this.state.correct)
-        console.log('wrong', this.state.incorrect)
+        this.handleResult()
     }
 
     decrementScore = () => {
@@ -43,19 +42,18 @@ class Quiz extends Component {
             incorrect: this.state.incorrect + 1
         }))
 
-        console.log('correct', this.state.correct)
-        console.log('wrong', this.state.incorrect)
+        this.handleResult()
     }
 
     handleResult = () => {
-        const { correct, incorrect, totalCards } = this.state
+        const { cardIndex, totalCards } = this.state
 
-        let answered = correct + incorrect
+        let answered = cardIndex + 1
 
         if (answered < totalCards) {
             this.setState(() => ({
                 displayAnswer: false,
-                cardIndex: this.state.cardIndex + 1
+                cardIndex: answered
             }))
         } else {
             this.setState(() => ({

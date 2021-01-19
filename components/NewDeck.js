@@ -58,15 +58,12 @@ class NewDeck extends Component {
         const { title } = this.state
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
-                <Text> New Deck </Text>
+                <Text style={styles.inputHeader}> Create a new deck </Text>
                 
                 <View style={styles.inputContainer}>
+                    <Text style={styles.inputLabel}>Name your deck</Text>
                     <TextInput 
-                        style={{
-                            height: 40,
-                            borderColor: 'gray',
-                            borderWidth: 1
-                        }}
+                        style={styles.inputText}
                         placeholder="Please enter deck title."
                         onChangeText={val => this.handleChange(val)}
                         value={title}
@@ -77,7 +74,7 @@ class NewDeck extends Component {
                       disabled={title === ''}
                       style={styles.submitBtn}
                       onPress={this.submitDeck}>
-                        <Text style={styles.submitBtnText}>SUBMIT</Text>
+                        <Text style={styles.submitBtnText}>CREATE DECK</Text>
                     </TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>
@@ -89,15 +86,28 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'flex-start',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     inputHeader: {
-        fontSize: 35,
+        fontSize: 25,
         paddingBottom: 25
     },
     inputContainer: {
         fontSize: 20,
-        paddingBottom: 20
+        paddingBottom: 20,
+        alignSelf: 'center',
+        alignItems: 'center'
+    },
+    inputLabel: {
+        fontSize: 18,
+        paddingBottom: 10
+    },
+    inputText: {
+        height: 'auto',
+        width: 260,
+        padding: 8,
+        borderColor: '#000',
+        borderWidth: 1
     },
     submitBtn: {
         backgroundColor: mauve,

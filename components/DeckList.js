@@ -26,8 +26,8 @@ export class DeckList extends Component {
         const { decks } = this.props
 
         return (
-            <View>
-                <Text>Decks</Text>
+            <View style={styles.container}>
+                <Text style={styles.header}>Pick a deck below.</Text>
                 {Object.keys(decks).map((deck) => {
                     const deckInfo = decks[deck]
                     // const check = getDeck('birds')
@@ -35,7 +35,7 @@ export class DeckList extends Component {
                     return(
                         <TouchableOpacity 
                         key={deck}
-                        style={styles.container}
+                        style={styles.deck}
                         onPress={() => this.props.navigation.navigate(
                             'Deck',
                             { 
@@ -54,7 +54,12 @@ export class DeckList extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    constainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    deck: {
         backgroundColor: mauve,
         borderRadius: 5,
         padding: 20,
@@ -72,7 +77,10 @@ const styles = StyleSheet.create({
         },
     },
     header: {
-        fontSize: 35,
+        fontSize: 25,
+        paddingBottom: 18,
+        paddingTop: 20,
+        alignSelf: 'center'
     },
     deckTitle: {
         color: '#fff',

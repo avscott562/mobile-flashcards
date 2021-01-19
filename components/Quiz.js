@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, StyleSheet, Animated } from 'react-native'
 import { connect } from 'react-redux'
 import { CommonActions } from '@react-navigation/native'
-import { mauve } from '../utils/colors'
+import { mauve, green, red, gray } from '../utils/colors'
 import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
-import { set } from 'react-native-reanimated'
 
 class Quiz extends Component {
     state = {
@@ -60,8 +59,7 @@ class Quiz extends Component {
                 screen: 'score'
             }))
 
-            clearLocalNotification()
-              .then(setLocalNotification)
+            clearLocalNotification().then(setLocalNotification)
         }
     }
 
@@ -93,17 +91,18 @@ class Quiz extends Component {
         const { deck, navigation } = this.props
 
         const percentage = (correct / totalCards) * 100
+        const card = cardIndex + 1
 
         return (
             <View>
                 <Text style={styles.header}> Quiz </Text>
-                <Text>{correct} / {totalCards}</Text>
+                <Text style={styles.countText}>{card} / {totalCards}</Text>
                 <View style={styles.container}>
                     {screen === 'question' && 
                         <View>
                             <Text style={styles.mainText}>{deck.questions[cardIndex].question}</Text>
                             <TouchableOpacity 
-                            style={styles.button}
+                            style={styles.quizBtn}
                             onPress={this.toggleAnswer}>
                                 <Text style={styles.buttonText}>View Answer</Text>
                             </TouchableOpacity>
@@ -114,12 +113,12 @@ class Quiz extends Component {
                         <View>
                             <Text style={styles.mainText}>{deck.questions[cardIndex].answer}</Text>
                             <TouchableOpacity 
-                                style={styles.button}
+                                style={styles.greenBtn}
                                 onPress={this.incrementScore}>
                                 <Text style={styles.buttonText}>Correct</Text>
                             </TouchableOpacity>
                             <TouchableOpacity 
-                                style={styles.button}
+                                style={styles.incorrectBtn}
                                 onPress={this.decrementScore}>
                                 <Text style={styles.buttonText}>Incorrect</Text>
                             </TouchableOpacity>
@@ -128,15 +127,17 @@ class Quiz extends Component {
                     
                     {screen === 'score' && 
                       <View>
-                          <Text style={styles.mainText}>{`${percentage}%`}</Text>
-                          <Text style={styles.mainText}>You did great!</Text>
+                          <View style={styles.scoreText}>
+                            <Text style={styles.mainText}>{`${percentage}%`}</Text>
+                            <Text style={styles.mainText}>{`You got ${correct} correct.`}</Text>
+                          </View>
                           <TouchableOpacity
                             style={styles.button}
                             onPress={() => navigation.navigate('DeckList')}>
                               <Text style={styles.buttonText}>Go To Decks</Text>
                           </TouchableOpacity>
                           <TouchableOpacity
-                            style={styles.button}
+                            style={styles.greenBtn}
                             onPress={this.reset}>
                               <Text style={styles.buttonText}>Restart Quiz</Text>
                           </TouchableOpacity>
@@ -176,8 +177,47 @@ const styles = StyleSheet.create({
         color: mauve,
         fontSize: 20,
     },
-    button: {
+    countText: {
+        fontSize: 20
+    },
+    scoreText: {
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    quizBtn: {
+        backgroundColor: mauve,
         padding: 10,
+        margin: 20,
+        borderRadius: 2,
+        height: 45,
+        alignSelf: 'center',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    greenBtn: {
+        backgroundColor: green,
+        padding: 10,
+        margin: 20,
+        borderRadius: 2,
+        height: 45,
+        alignSelf: 'center',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    incorrectBtn: {
+        backgroundColor: red,
+        padding: 10,
+        margin: 20,
+        borderRadius: 2,
+        height: 45,
+        alignSelf: 'center',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    button: {
+        backgroundColor: mauve,
+        padding: 5,
         paddingBottom: 30,
         marginTop: 30,
         borderRadius: 2,
@@ -187,6 +227,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     buttonText: {
+        color: '#fff',
         fontSize: 22,
         textAlign: 'center'
     },

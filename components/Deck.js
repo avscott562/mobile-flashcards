@@ -47,7 +47,7 @@ class Deck extends Component {
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity 
-                      style={styles.submitBtn, {backgroundColor: '#a7c5eb'}} 
+                      style={styles.submitBtn} 
                       onPress={() => navigation.navigate(
                         'NewCard',
                         { deckId, title: deck.title }
@@ -55,8 +55,7 @@ class Deck extends Component {
                         <Text style={styles.submitBtnText}>Add New Card</Text>
                     </TouchableOpacity>
                     <TouchableOpacity 
-                    //   disabled={hasCards}
-                      style={styles.submitBtn, {backgroundColor: '#83a95c'}}
+                      style={styles.submitBtn}
                       onPress={this.toQuiz}>
                         <Text style={styles.submitBtnText}>Start Quiz</Text>
                     </TouchableOpacity>
@@ -110,16 +109,17 @@ const styles = StyleSheet.create({
         },
     },
     submitBtn: {
+        backgroundColor: mauve,
         padding: 10,
-        paddingBottom: 30,
-        marginTop: 30,
+        margin: 20,
         borderRadius: 2,
         height: 45,
-        alignSelf: 'flex-end',
+        alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center'
     },
     submitBtnText: {
+        color: '#fff',
         fontSize: 22,
         textAlign: 'center'
     },

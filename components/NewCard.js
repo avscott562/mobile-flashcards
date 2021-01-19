@@ -71,7 +71,7 @@ class NewCard extends Component {
                 <Text style={styles.inputHeader}> Create a New Flashcard </Text>
                 
                 <View style={styles.inputContainer}>
-                    <Text> What's your question? </Text>
+                    <Text style={styles.inputLabel}> What's your question? </Text>
                     <TextInput 
                     multiline
                     style={styles.inputText}
@@ -82,7 +82,7 @@ class NewCard extends Component {
                 </View>
 
                 <View style={styles.inputContainer}>
-                    <Text> What's the answer? </Text>
+                    <Text style={styles.inputLabel}> What's the answer? </Text>
                     <TextInput 
                     style={styles.inputText}
                     multiline
@@ -124,20 +124,24 @@ const styles = StyleSheet.create({
         },
     },
     inputHeader: {
-        fontSize: 25,
-        paddingBottom: 25
+        fontSize: 20,
+        paddingBottom: 20
     },
     inputContainer: {
-        fontSize: 20,
-        paddingBottom: 20,
+        fontSize: 18,
+        paddingBottom: 18,
         alignSelf: 'flex-start',
         // alignItems: 'stretch'
     },
+    inputLabel: {
+        fontSize: 18,
+        paddingBottom: 10
+    },
     inputText: {
         height: 'auto',
-        width: 250,
+        width: 260,
         padding: 8,
-        borderColor: '#70af85',
+        borderColor: '#000',
         borderWidth: 1
     },
     submitBtn: {

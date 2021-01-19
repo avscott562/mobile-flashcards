@@ -10,7 +10,7 @@ export function getDecks () {
 
 export function getDeck (id) {
     return AsyncStorage.getItem(FLASHCARD_STORAGE_KEY)
-        .then((results) => JSON.parse(result))
+        .then((results) => JSON.parse(results))
         .then((decks) => decks[id])
 }
 
@@ -33,7 +33,7 @@ export function addCardToDeck (title, card) {
 
 export function clearLocalNotification() {
     AsyncStorage.removeItem(NOTIFICATION_STORAGE_KEY)
-      .then(Notifications.cancelAllScheduledNotificationsAsync())
+      .then(Notifications.cancelAllScheduledNotificationsAsync)
 }
 
 function createNotification() {
@@ -64,7 +64,7 @@ export function setLocalNotification() {
                       tomorrow.setHours(18)
                       tomorrow.setMinutes(0)
 
-                      Notifications.scheduleNotificationAsync(
+                      Notifications.scheduleLocalNotificationAsync(
                           createNotification(),
                           {
                               time: tomorrow,

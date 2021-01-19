@@ -3,6 +3,8 @@ import { Text, View, TouchableOpacity, StyleSheet, Animated } from 'react-native
 import { connect } from 'react-redux'
 import { CommonActions } from '@react-navigation/native'
 import { mauve } from '../utils/colors'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
+import { set } from 'react-native-reanimated'
 
 class Quiz extends Component {
     state = {
@@ -57,6 +59,9 @@ class Quiz extends Component {
             this.setState(() => ({
                 screen: 'score'
             }))
+
+            clearLocalNotification()
+              .then(setLocalNotification)
         }
     }
 

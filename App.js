@@ -16,6 +16,7 @@ import NewCard from './components/NewCard'
 import Quiz from './components/Quiz'
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
 import { mauve } from './utils/colors'
+import { setLocalNotification } from './utils/helpers'
 
 
 
@@ -80,6 +81,10 @@ const DeckNavigatorStackScreen = () => (
 )
 
 export default class App extends Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
+
   render() {
     return (
       <NavigationContainer>
